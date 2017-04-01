@@ -18,5 +18,8 @@ public class MyLeanCloudApp extends Application {
         // 初始化参数依次为 this, AppId, AppKey
         AVOSCloud.initialize(this,"9ThylQduJJxQhqOEpqwooFUN-gzGzoHsz","JPNipjTp6Qan66INHQ67BE7Q");
         AppConfig.setDebugLogEnabled(true);
+
+        // 启用北美节点
+//        AVOSCloud.useAVCloudUS();
     }
 }
