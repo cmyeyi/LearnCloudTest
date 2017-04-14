@@ -1,6 +1,5 @@
 package com.aile.cloud.config;
 
-import com.avos.avoscloud.AVOSCloud;
 
 /**
  * Created by yeyi on 17/4/1.
@@ -9,6 +8,5 @@ import com.avos.avoscloud.AVOSCloud;
 public class AppConfig {
 
     public static void setDebugLogEnabled(boolean isDebug) {
-        AVOSCloud.setDebugLogEnabled(isDebug);
     }
 }

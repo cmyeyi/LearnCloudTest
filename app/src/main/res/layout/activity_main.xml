@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aile.cloud.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.aile.cloud.activity.MainActivity">
 
     <Button
-        android:id="@+id/main_request"
+        android:id="@+id/main_drop"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_margin="15dp"
-        android:text="REQUEST" />
+        android:text="DROP" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/main_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

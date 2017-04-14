@@ -3,10 +3,6 @@
 buildscript {
     repositories {
         jcenter()
-        //这里是 LeanCloud 的包仓库
-        maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
@@ -19,13 +15,35 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        //这里是 LeanCloud 的包仓库
-        maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
-        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+ext {
+    // Sdk and tools
+    minSdkVersion = 15
+    targetSdkVersion = 23
+    compileSdkVersion = 23
+    buildToolsVersion = '23.0.3'
+
+    // App dependencies
+    supportLibraryVersion = '23.4.0'
+    mockitoVersion = '1.10.19'
+    powerMockito = '1.6.2'
+    hamcrestVersion = '1.3'
+    runnerVersion = '0.4.1'
+    rulesVersion = '0.4.1'
+    espressoVersion = '2.2.1'
+    retrofitVersion = '2.0.0-beta2'
+    okhttploggingVersion = '2.6.0'
+    rxjavaVersion = '1.1.0'
+    rxbindingVersion = '0.2.0'
+    glideVersion = '3.6.1'
+    glideokhttpVersion = '1.3.1'
+    photoviewVersion = '1.2.4'
+    gsonVersion = '2.3.1'
 }

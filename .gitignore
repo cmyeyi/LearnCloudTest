@@ -4,7 +4,14 @@
 /local.properties
 /build
 app/build
-app/libs/
+app/libs
+/basesdk/build/
+
+/basesdk/*.iml
+/basesdk/libs
+# 添加整个 .idea 目录和文件
+/.idea/
+.gitignore
 .DS_Store
 /captures
 .externalNativeBuild
