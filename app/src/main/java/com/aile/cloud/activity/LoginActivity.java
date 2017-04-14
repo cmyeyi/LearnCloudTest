@@ -1,105 +1,112 @@
 package com.aile.cloud.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aile.cloud.R;
-import com.aile.cloud.base.BaseActivity;
-import com.aile.cloud.entity.User;
-import com.aile.cloud.net.HttpRequest;
-import com.aile.cloud.net.SimpleSubscriber;
-import com.aile.www.basesdk.net.ObservableDecorator;
+import com.aile.cloud.AppApplication;
+import com.aile.cloud.net.IRequestListener;
+import com.aile.cloud.net.RequestManager;
+import com.aile.cloud.net.request.LoginParam;
+import com.aile.cloud.net.request.LoginRequest;
+import com.aile.cloud.net.request.LoginResponse;
+import com.aile.www.basesdk.LoginManager;
 
-import rx.Observable;
+public class LoginActivity extends Activity implements View.OnClickListener {
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+    private View mLoadingView;
+    private TextView mCommitView;
+    private EditText mUserNameView;
+    private EditText mUserPwdView;
+    private TextView mPwdLostView;
+    private String mUserId;
+    private String mPassword;
+    private String mUserName;
 
-    private EditText et_username;
-    private EditText et_password;
-    private Button btn_login;
-    private LinearLayout ll_regist;
-
-    /**
-     * 是否为验证登录,true-登录成功后,直接finish返回到来源页 false-登录成功后跳转到主页
-     */
-    private boolean checkLogin;
+    public static void launch(Activity activity) {
+        if (null == activity) {
+            return;
+        }
+        Intent intent = new Intent(activity, LoginActivity.class);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        initExtras();
         initView();
-    }
-
-    private void initExtras() {
-        checkLogin = getIntent().getBooleanExtra("checkLogin", false);
+        initListener();
     }
 
     private void initView() {
-        initBackTitle("登录");
-
-        et_username = (EditText) findViewById(R.id.et_username);
-        et_password = (EditText) findViewById(R.id.et_password);
-        btn_login = (Button) findViewById(R.id.btn_login);
-        ll_regist = (LinearLayout) findViewById(R.id.ll_regist);
-
-        btn_login.setOnClickListener(this);
-        ll_regist.setOnClickListener(this);
+        mLoadingView = findViewById(R.id.login_net_loading);
+        mCommitView = (TextView) findViewById(R.id.login_commit_button);
+        mUserNameView = (EditText) findViewById(R.id.login_user_name);
+        mUserPwdView = (EditText) findViewById(R.id.login_user_pwd);
+        mPwdLostView = (TextView) findViewById(R.id.login_user_pwd_lost);
+        mPwdLostView.setVisibility(View.GONE);
+        loginAuto();
     }
 
-    private void login() {
-        // validate
-        String username = et_username.getText().toString().trim();
-        if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
-            return;
+
+    private void loginAuto() {
+        if(LoginManager.getInstance().isUserLogin()) {
+            mUserId = LoginManager.getInstance().getUserInfo().getUserId();
+            mPassword = LoginManager.getInstance().getUserInfo().getPassword();
+            mUserName = LoginManager.getInstance().getUserInfo().getName();
+            MainActivity.launch(LoginActivity.this, mUserId, mPassword);
+            finish();
         }
+    }
 
-        String password = et_password.getText().toString().trim();
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        showProgressDialog();
-        Observable<User> observable = HttpRequest.login(username, password);
-        ObservableDecorator.decorate(observable)
-                .subscribe(new SimpleSubscriber<User>(this) {
-                    @Override
-                    public void onNext(User user) {
-                        dismissProgressDialog();
-
-                        if (checkLogin) {
-                            // 是验证登录,登录成功后,直接finish返回到来源页
-                            finish();
-                        } else {
-                            // 不是验证登录,登录成功后跳转到主页
-                            intent2Activity(MainActivity.class);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        super.onError(throwable);
-                        dismissProgressDialog();
-                    }
-                });
+    private void initListener() {
+        mCommitView.setOnClickListener(this);
+        mPwdLostView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_login:
-                login();
-                break;
-            case R.id.ll_regist:
+            case R.id.login_commit_button:
+                String name = mUserNameView.getText().toString().trim();
+                String pwd = mUserPwdView.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    Toast.makeText(LoginActivity.this, getString(R.string.login_user_name_empty), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(pwd)) {
+                    Toast.makeText(LoginActivity.this, getString(R.string.login_user_pwd_empty), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mLoadingView.setVisibility(View.VISIBLE);
+                LoginParam param = LoginParam.create(name, pwd);
+                LoginRequest request = new LoginRequest(param, new IRequestListener<LoginResponse>() {
+                    @Override
+                    public void onUIComplete(LoginResponse response) {
+                        if(response != null) {
+                            if (response.isSuccess()) {
+                                mUserId = response.getLoginInfo().getUserId();
+                                mPassword = response.getLoginInfo().getPassword();
+                                mUserName = response.getLoginInfo().getName();
+                                AppApplication.getInstance().setUserName(mUserName);
+                                LoginManager.getInstance().setUserInfo(response.getLoginInfo());
+                                MainActivity.launch(LoginActivity.this, mUserId, mPassword);
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, response.getReturnInfo().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        mLoadingView.setVisibility(View.GONE);
+                    }
+                });
+                RequestManager.getInstance().requestAsync(request);
                 break;
         }
     }

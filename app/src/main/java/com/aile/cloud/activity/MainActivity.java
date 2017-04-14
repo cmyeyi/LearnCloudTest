@@ -1,24 +1,28 @@
 package com.aile.cloud.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.aile.cloud.R;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import com.aile.cloud.utils.AnimaUtils;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-
+    public final static String KEY_LOGIN_UID = "login_uid";
+    public final static String KEY_LOGIN_PWD = "login_pwd";
     private Button mDropButton;
 
     private ImageView mImageView;
+
+    public static void launch(Activity activity, String userId, String pwd) {
+        Intent i = new Intent(activity, MainActivity.class);
+        i.putExtra(KEY_LOGIN_UID, userId);
+        i.putExtra(KEY_LOGIN_PWD, pwd);
+        AnimaUtils.showUp(activity, i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +48,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.main_drop:
-                loadImageView();
                 break;
         }
     }
 
-    private void loadImageView() {
-        String internetUrl = "http://inthecheesefactory.com/uploads/source/nestedfragment/fragments.png";
-        Glide.with(this)
-                .load(internetUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .placeholder(R.drawable.ic_account_circle_grey600_24dp)
-//                .error(R.drawable.ic_account_circle_grey600_24dp)
-                .centerCrop()
-                .crossFade()
-                .into(mImageView);
-    }
 
 }

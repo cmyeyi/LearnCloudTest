@@ -1,5 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dialog_positive">确定</string>
-    <string name="dialog_negative">取消</string>
+
+    <string name="app_name">BaseSDK</string>
+
+    <string name="common_loading">加载中...</string>
+    <string name="share_app_name_qq">QQ</string>
+    <string name="share_app_name_weixin">微信</string>
+    <string name="share_app_name_sina">新浪微博</string>
+    <string name="share_tips_start">正在为您分享...</string>
+    <string name="share_tips_save_photo_start">正在为您保存图片...</string>
+    <string name="share_tips_success">分享成功</string>
+    <string name="share_tips_cancel">取消分享</string>
+    <string name="share_tips_deny">授权失败，请稍后尝试</string>
+    <string name="share_tips_error">分享失败，请稍后尝试</string>
+    <string name="share_tips_error_later">请稍后发送</string>
+    <string name="share_install_app_tip">请先安装%1$s客户端</string>
+
+    <!--加载更多-->
+    <string name="default_load_more_loading">加载中…</string>
+    <string name="default_load_more_loaded_empty">加载更多为空</string>
+    <string name="default_load_more_loaded_no_more">没有更多数据了</string>
+    <string name="default_load_more_click_to_load_more">点击加载更多</string>
+    <string name="default_load_more_error">加载出错</string>
 </resources>

@@ -2,4 +2,56 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="common_1dp">1dp</dimen>
+    <dimen name="common_2dp">2dp</dimen>
+    <dimen name="common_3dp">3dp</dimen>
+    <dimen name="common_4dp">4dp</dimen>
+    <dimen name="common_5dp">5dp</dimen>
+    <dimen name="common_10dp">10dp</dimen>
+    <dimen name="common_15dp">15dp</dimen>
+    <dimen name="common_16dp">16dp</dimen>
+    <dimen name="common_18dp">18dp</dimen>
+    <dimen name="common_20dp">20dp</dimen>
+    <dimen name="common_25dp">25dp</dimen>
+    <dimen name="common_30dp">30dp</dimen>
+    <dimen name="common_35dp">35dp</dimen>
+    <dimen name="common_40dp">40dp</dimen>
+    <dimen name="common_44dp">44dp</dimen>
+    <dimen name="common_45dp">45dp</dimen>
+    <dimen name="common_48dp">48dp</dimen>
+    <dimen name="common_50dp">50dp</dimen>
+    <dimen name="common_55dp">55dp</dimen>
+    <dimen name="common_60dp">60dp</dimen>
+    <dimen name="common_64dp">64dp</dimen>
+    <dimen name="common_110dp">110dp</dimen>
+    <dimen name="common_120dp">120dp</dimen>
+    <dimen name="common_230dp">230dp</dimen>
+    <dimen name="common_335dp">335dp</dimen>
+    <dimen name="login_input_edt_height">40dp</dimen>
+    <dimen name="login_commit_button_height">44dp</dimen>
+    <dimen name="login_commit_button_width">335dp</dimen>
+
+
+    <!-- 字体 -->
+    <dimen name="t8sp">8sp</dimen>
+    <dimen name="t9sp">9sp</dimen>
+    <dimen name="t10sp">10sp</dimen>
+    <dimen name="t11sp">11sp</dimen>
+    <dimen name="t12sp">12sp</dimen>
+    <dimen name="t13sp">13sp</dimen>
+    <dimen name="t14sp">14sp</dimen>
+    <dimen name="t15sp">15sp</dimen>
+    <dimen name="t16sp">16sp</dimen>
+    <dimen name="t17sp">17sp</dimen>
+    <dimen name="t18sp">18sp</dimen>
+    <dimen name="t19sp">19sp</dimen>
+    <dimen name="t20sp">20sp</dimen>
+    <dimen name="t21sp">21sp</dimen>
+    <dimen name="t22sp">22sp</dimen>
+    <dimen name="t23sp">23sp</dimen>
+    <dimen name="t24sp">24sp</dimen>
+    <dimen name="t25sp">25sp</dimen>
+    <dimen name="t26sp">26sp</dimen>
+    <dimen name="t30sp">30sp</dimen>
+    <dimen name="t40sp">40sp</dimen>
 </resources>
