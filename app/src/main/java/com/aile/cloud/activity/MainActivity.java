@@ -3,19 +3,33 @@ package com.aile.cloud.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.aile.cloud.R;
+import com.aile.cloud.ad.Ads;
+import com.aile.cloud.net.request.GsonRequest;
 import com.aile.cloud.utils.AnimaUtils;
+import com.aile.cloud.view.HomeAdBanner;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     public final static String KEY_LOGIN_UID = "login_uid";
     public final static String KEY_LOGIN_PWD = "login_pwd";
-    private Button mDropButton;
-
-    private ImageView mImageView;
+    private RequestQueue mQueue;
+    private RelativeLayout mHomeBannerContainer;
+    private HomeAdBanner mHomeADBanner;
+    private Button mApiButton;
 
     public static void launch(Activity activity, String userId, String pwd) {
         Intent i = new Intent(activity, MainActivity.class);
@@ -30,26 +44,69 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         initView();
         initListener();
+        initVolley();
+        loadData();
     }
 
     private void initView() {
-        mDropButton = (Button) findViewById(R.id.main_drop);
-        mImageView = (ImageView) findViewById(R.id.main_iv);
+        mApiButton = (Button) findViewById(R.id.main_api);
+        mHomeBannerContainer = (RelativeLayout) findViewById(R.id.home_main_banner);
+        mHomeADBanner = new HomeAdBanner(MainActivity.this, mHomeBannerContainer);
     }
 
     private void initListener() {
-        if (mDropButton != null) {
-            mDropButton.setOnClickListener(this);
+        if (mApiButton != null) {
+            mApiButton.setOnClickListener(this);
         }
+    }
+
+    private void initVolley() {
+        mQueue = Volley.newRequestQueue(this);
+    }
+
+    private void loadData() {
+        requestHomeBanner();
     }
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.main_drop:
+            case R.id.main_api:
+                requestHomeBanner();
                 break;
         }
+    }
+
+    private void requestHomeBanner() {
+        String bannerUrl = "https://emotao.com/miaotao/api/banner/list.d";
+        GsonRequest<Ads> gsonRequest = new GsonRequest<Ads>(
+                bannerUrl,
+                Ads.class,
+                new Response.Listener<Ads>() {
+                    @Override
+                    public void onResponse(Ads ads) {
+                        if(ads != null) {
+                            List banners = ads.getAds();
+                            if(banners != null) {
+                                Log.d("YYYY", "banners = " + banners.size());
+                                mHomeADBanner.reset();
+                                mHomeADBanner.setData(banners);
+                                mHomeADBanner.showBanner();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(error != null) {
+                            Log.e("YYYY", error.getMessage(), error);
+                        }
+                    }
+                });
+
+        mQueue.add(gsonRequest);
     }
 
 

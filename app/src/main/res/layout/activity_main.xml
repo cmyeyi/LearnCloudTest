@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_50_aplha"
     android:orientation="vertical"
     tools:context="com.aile.cloud.activity.MainActivity">
 
-    <Button
-        android:id="@+id/main_drop"
+    <RelativeLayout
+        android:id="@+id/home_main_banner"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="15dp"
-        android:text="DROP" />
+        android:layout_height="@dimen/common_120dp"
+        android:background="@color/colorAccent"
+        android:visibility="visible"/>
 
-    <ImageView
-        android:id="@+id/main_iv"
+    <Button
+        android:id="@+id/main_api"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"/>
-</LinearLayout>
+        android:layout_height="@dimen/common_45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:text="API" />
+
+</RelativeLayout>

@@ -10,13 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aile.cloud.R;
-import com.aile.cloud.AppApplication;
-import com.aile.cloud.net.IRequestListener;
-import com.aile.cloud.net.RequestManager;
-import com.aile.cloud.net.request.LoginParam;
-import com.aile.cloud.net.request.LoginRequest;
-import com.aile.cloud.net.request.LoginResponse;
 import com.aile.www.basesdk.LoginManager;
+import com.android.volley.RequestQueue;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -57,7 +52,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 
     private void loginAuto() {
-        if(LoginManager.getInstance().isUserLogin()) {
+        if (LoginManager.getInstance().isUserLogin()) {
             mUserId = LoginManager.getInstance().getUserInfo().getUserId();
             mPassword = LoginManager.getInstance().getUserInfo().getPassword();
             mUserName = LoginManager.getInstance().getUserInfo().getName();
@@ -86,28 +81,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     return;
                 }
                 mLoadingView.setVisibility(View.VISIBLE);
-                LoginParam param = LoginParam.create(name, pwd);
-                LoginRequest request = new LoginRequest(param, new IRequestListener<LoginResponse>() {
-                    @Override
-                    public void onUIComplete(LoginResponse response) {
-                        if(response != null) {
-                            if (response.isSuccess()) {
-                                mUserId = response.getLoginInfo().getUserId();
-                                mPassword = response.getLoginInfo().getPassword();
-                                mUserName = response.getLoginInfo().getName();
-                                AppApplication.getInstance().setUserName(mUserName);
-                                LoginManager.getInstance().setUserInfo(response.getLoginInfo());
-                                MainActivity.launch(LoginActivity.this, mUserId, mPassword);
-                                finish();
-                            } else {
-                                Toast.makeText(LoginActivity.this, response.getReturnInfo().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        mLoadingView.setVisibility(View.GONE);
-                    }
-                });
-                RequestManager.getInstance().requestAsync(request);
                 break;
         }
     }
+
+
 }

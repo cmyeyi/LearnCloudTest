@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_50_aplha"
+    android:orientation="vertical"
+    tools:context="com.aile.cloud.activity.MainActivity">
+
+    <Button
+        android:id="@+id/main_drop"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:text="DROP" />
+
+    <Button
+        android:id="@+id/string_request"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:text="STRING" />
+
+    <Button
+        android:id="@+id/json_request"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:text="JSON" />
+
+    <ImageView
+        android:id="@+id/main_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/common_5dp" />
+</LinearLayout>
