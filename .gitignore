@@ -4,7 +4,6 @@
 /local.properties
 /build
 app/build
-app/libs
 /basesdk/build/
 
 /basesdk/*.iml

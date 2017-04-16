@@ -30,9 +30,18 @@ android {
     lintOptions {
         abortOnError false
     }
+
 }
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':basesdk')
+    compile (name:'volley-release',ext:'aar')
 }
