@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import com.aile.cloud.R;
 import com.aile.cloud.ad.Ads;
 import com.aile.cloud.net.request.GsonRequest;
+import com.aile.cloud.net.request.URLConfig;
 import com.aile.cloud.utils.AnimaUtils;
 import com.aile.cloud.view.HomeAdBanner;
 import com.android.volley.RequestQueue;
@@ -79,16 +80,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void requestHomeBanner() {
-        String bannerUrl = "https://emotao.com/miaotao/api/banner/list.d";
         GsonRequest<Ads> gsonRequest = new GsonRequest<Ads>(
-                bannerUrl,
+                URLConfig.HOME_BANNER,
                 Ads.class,
                 new Response.Listener<Ads>() {
                     @Override
                     public void onResponse(Ads ads) {
-                        if(ads != null) {
+                        if (ads != null) {
                             List banners = ads.getAds();
-                            if(banners != null) {
+                            if (banners != null) {
                                 Log.d("YYYY", "banners = " + banners.size());
                                 mHomeADBanner.reset();
                                 mHomeADBanner.setData(banners);
@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if(error != null) {
+                        if (error != null) {
                             Log.e("YYYY", error.getMessage(), error);
                         }
                     }
