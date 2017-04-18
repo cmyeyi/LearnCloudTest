@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
  * Created by yeyi on 17/4/16.
  */
 
-public class GsonRequest<T> extends Request<T> {
+public class GSONRequest<T> extends Request<T> {
 
     private final Response.Listener<T> mListener;
 
@@ -21,7 +21,7 @@ public class GsonRequest<T> extends Request<T> {
 
     private Class<T> mClass;
 
-    public GsonRequest(int method, String url, Class<T> clazz, Response.Listener<T> listener,
+    public GSONRequest(int method, String url, Class<T> clazz, Response.Listener<T> listener,
                        Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         mGson = new Gson();
@@ -29,7 +29,7 @@ public class GsonRequest<T> extends Request<T> {
         mListener = listener;
     }
 
-    public GsonRequest(String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+    public GSONRequest(String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
         this(Method.GET, url, clazz, listener, errorListener);
     }
 

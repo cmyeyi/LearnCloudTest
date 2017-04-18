@@ -13,7 +13,8 @@ import com.aile.cloud.R;
 import com.aile.cloud.adapter.TagPagerAdapter;
 import com.aile.cloud.net.bean.HomeBanner;
 import com.aile.cloud.net.bean.HomeProduct;
-import com.aile.cloud.net.request.GsonRequest;
+import com.aile.cloud.net.bean.ProductDetail;
+import com.aile.cloud.net.request.GSONRequest;
 import com.aile.cloud.net.request.URLConfig;
 import com.aile.cloud.utils.AnimaUtils;
 import com.aile.cloud.view.HomeAdBanner;
@@ -85,7 +86,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void requestHomeBanner() {
-        GsonRequest<HomeBanner> gsonRequest = new GsonRequest<HomeBanner>(
+        GSONRequest<HomeBanner> GSONRequest = new GSONRequest<HomeBanner>(
                 URLConfig.HOME_BANNER,
                 HomeBanner.class,
                 new Response.Listener<HomeBanner>() {
@@ -111,7 +112,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 });
 
-        mQueue.add(gsonRequest);
+        mQueue.add(GSONRequest);
     }
 
 
@@ -135,32 +136,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         };
 
-        GsonRequest<HomeProduct> gsonRequest = new GsonRequest<HomeProduct>(pUrl, HomeProduct.class, pListener, pErrorListener);
-        mQueue.add(gsonRequest);
+        GSONRequest<HomeProduct> GSONRequest = new GSONRequest<HomeProduct>(pUrl, HomeProduct.class, pListener, pErrorListener);
+        mQueue.add(GSONRequest);
     }
 
-//    private void requestHomeProductDetail() {
-//        String productId = "34";
-//        String detailUrl = URLConfig.HOME_PRODUCT_DETAIL + productId;
-//        Response.Listener<ProductDetail> pDetailListener = new Response.Listener<ProductDetail>() {
-//            @Override
-//            public void onResponse(ProductDetail p) {
-//                if (p != null) {
-//                    Log.d(TAG, "msg = " + p.result.msg + ", total = " + p.body.getTotal());
-//                    Log.d(TAG, "imgUrl = " + p.body.getRows().getImageList().get(0).imgUrl);
-//                }
-//            }
-//        };
-//        Response.ErrorListener pDetailErrorListener = new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                if (error != null) {
-//                    Log.e(TAG, error.getMessage(), error);
-//                }
-//            }
-//        };
-//        GsonRequest<ProductDetail> gsonRequest = new GsonRequest<ProductDetail>(detailUrl, ProductDetail.class, pDetailListener, pDetailErrorListener);
-//        mQueue.add(gsonRequest);
-//    }
+    private void requestHomeProductDetail() {
+        String productId = "34";
+        String detailUrl = URLConfig.HOME_PRODUCT_DETAIL + productId;
+        Response.Listener<ProductDetail> pDetailListener = new Response.Listener<ProductDetail>() {
+            @Override
+            public void onResponse(ProductDetail p) {
+                if (p != null) {
+                    Log.d(TAG, "msg = " + p.result.msg + ", total = " + p.body.getTotal());
+                    Log.d(TAG, "imgUrl = " + p.body.getRows().getImageList().get(0).imgUrl);
+                }
+            }
+        };
+        Response.ErrorListener pDetailErrorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error != null) {
+                    Log.e(TAG, error.getMessage(), error);
+                }
+            }
+        };
+        GSONRequest<ProductDetail> GSONRequest = new GSONRequest<ProductDetail>(detailUrl, ProductDetail.class, pDetailListener, pDetailErrorListener);
+        mQueue.add(GSONRequest);
+    }
 
 }
