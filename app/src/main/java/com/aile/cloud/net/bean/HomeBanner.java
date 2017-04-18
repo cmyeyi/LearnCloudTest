@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by asus on 2015/8/27.
  */
-public class Ads implements UnProguardable {
+public class HomeBanner implements UnProguardable {
 
     public Result result;
     public Body body;

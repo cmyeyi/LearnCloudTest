@@ -128,7 +128,7 @@ public class ProductDetail {
         public String batchNumber;
         private List<PImage> imageList;
 
-        public List<PImage> getImages() {
+        public List<PImage> getImageList() {
             Gson gson = new Gson();
             String json = gson.toJson(imageList);
             return fromJsonList(json, PImage.class);

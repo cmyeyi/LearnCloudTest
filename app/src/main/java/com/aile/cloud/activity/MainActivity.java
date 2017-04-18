@@ -11,9 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.aile.cloud.R;
 import com.aile.cloud.adapter.TagPagerAdapter;
-import com.aile.cloud.net.bean.Ads;
+import com.aile.cloud.net.bean.HomeBanner;
 import com.aile.cloud.net.bean.HomeProduct;
-import com.aile.cloud.net.bean.ProductDetail;
 import com.aile.cloud.net.request.GsonRequest;
 import com.aile.cloud.net.request.URLConfig;
 import com.aile.cloud.utils.AnimaUtils;
@@ -80,19 +79,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.request:
-//                requestHomeProducts();
-                requestHomeProductDetail();
+                requestHomeProducts();
                 break;
         }
     }
 
     private void requestHomeBanner() {
-        GsonRequest<Ads> gsonRequest = new GsonRequest<Ads>(
+        GsonRequest<HomeBanner> gsonRequest = new GsonRequest<HomeBanner>(
                 URLConfig.HOME_BANNER,
-                Ads.class,
-                new Response.Listener<Ads>() {
+                HomeBanner.class,
+                new Response.Listener<HomeBanner>() {
                     @Override
-                    public void onResponse(Ads ads) {
+                    public void onResponse(HomeBanner ads) {
                         if (ads != null) {
                             List banners = ads.getAds();
                             if (banners != null) {
@@ -123,7 +121,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             @Override
             public void onResponse(HomeProduct p) {
                 if (p != null) {
-                    List ps = p.getProduct();
+                    List ps = p.result.getData();
                     Log.d(TAG, "" + ps.size());
                 }
             }
@@ -141,28 +139,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mQueue.add(gsonRequest);
     }
 
-    private void requestHomeProductDetail() {
-        String productId = "34";
-        String detailUrl = URLConfig.HOME_PRODUCT_DETAIL + productId;
-        Response.Listener<ProductDetail> pDetailListener = new Response.Listener<ProductDetail>() {
-            @Override
-            public void onResponse(ProductDetail p) {
-                if (p != null) {
-                    Log.d(TAG, "msg = " + p.result.msg + ", total = " + p.body.getTotal());
-                    Log.d(TAG, "imgUrl = " + p.body.getRows().getImages().get(0).imgUrl);
-                }
-            }
-        };
-        Response.ErrorListener pDetailErrorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (error != null) {
-                    Log.e(TAG, error.getMessage(), error);
-                }
-            }
-        };
-        GsonRequest<ProductDetail> gsonRequest = new GsonRequest<ProductDetail>(detailUrl, ProductDetail.class, pDetailListener, pDetailErrorListener);
-        mQueue.add(gsonRequest);
-    }
+//    private void requestHomeProductDetail() {
+//        String productId = "34";
+//        String detailUrl = URLConfig.HOME_PRODUCT_DETAIL + productId;
+//        Response.Listener<ProductDetail> pDetailListener = new Response.Listener<ProductDetail>() {
+//            @Override
+//            public void onResponse(ProductDetail p) {
+//                if (p != null) {
+//                    Log.d(TAG, "msg = " + p.result.msg + ", total = " + p.body.getTotal());
+//                    Log.d(TAG, "imgUrl = " + p.body.getRows().getImageList().get(0).imgUrl);
+//                }
+//            }
+//        };
+//        Response.ErrorListener pDetailErrorListener = new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                if (error != null) {
+//                    Log.e(TAG, error.getMessage(), error);
+//                }
+//            }
+//        };
+//        GsonRequest<ProductDetail> gsonRequest = new GsonRequest<ProductDetail>(detailUrl, ProductDetail.class, pDetailListener, pDetailErrorListener);
+//        mQueue.add(gsonRequest);
+//    }
 
 }

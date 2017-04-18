@@ -19,36 +19,6 @@ import java.util.List;
 public class HomeProduct implements Serializable, UnProguardable {
     public HomeProductResult result;
 
-    public String getCode() {
-        return result.getCode();
-    }
-
-    public List getProduct() {
-        Gson gson = new Gson();
-        String json = gson.toJson(result.getData());
-        return fromJsonList(json, Product.class);
-    }
-
-    private <T extends Product> ArrayList fromJsonList(String json, Class<T> cls) {
-        if (json == null || TextUtils.isEmpty(json)) {
-            return null;
-        }
-        ArrayList mList = null;
-        try {
-            mList = new ArrayList();
-            Gson gson = new Gson();
-
-            JsonArray array = new JsonParser().parse(json).getAsJsonArray();
-            for (final JsonElement elem : array) {
-                Product product = gson.fromJson(elem, cls);
-                mList.add(product);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mList;
-    }
-
     public class HomeProductResult {
         public String code;
         public List<Product> data;
@@ -66,7 +36,29 @@ public class HomeProduct implements Serializable, UnProguardable {
         }
 
         public List<Product> getData() {
-            return data;
+            Gson gson = new Gson();
+            String json = gson.toJson(data);
+            return fromJsonList(json, Product.class);
+        }
+
+        private <T extends Product> ArrayList fromJsonList(String json, Class<T> cls) {
+            if (json == null || TextUtils.isEmpty(json)) {
+                return null;
+            }
+            ArrayList mList = null;
+            try {
+                mList = new ArrayList();
+                Gson gson = new Gson();
+
+                JsonArray array = new JsonParser().parse(json).getAsJsonArray();
+                for (final JsonElement elem : array) {
+                    Product product = gson.fromJson(elem, cls);
+                    mList.add(product);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return mList;
         }
     }
 
