@@ -9,7 +9,7 @@ public class URLConfig {
     //首页产品列表
     public final static String HOME_PRODUCT_LIST = BASE_HOST + "product/getHomeProducts/1.d";
     //产品详情
-    public final static String PRODUCT_DETAIL = BASE_HOST + "product/getProductDetail.d?productId=34";
+    public final static String HOME_PRODUCT_DETAIL = BASE_HOST + "product/getProductDetail.d?productId=";
     //奖品揭晓列表
     public final static String AWARD_ANNOUNCE_LIST = BASE_HOST + "awardlog/announceList.d?page=1&pageSize=10";
     //大转盘

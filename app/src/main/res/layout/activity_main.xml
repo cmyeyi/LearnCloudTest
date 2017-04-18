@@ -13,14 +13,49 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_120dp"
         android:background="@color/colorAccent"
-        android:visibility="visible"/>
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/rl_pic_tag"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_40dp"
+        android:layout_below="@+id/home_main_banner"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px1"
+            android:layout_alignParentTop="true"
+            android:background="@color/new_black_6" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/new_black_6" />
+
+        <com.aile.www.basesdk.view.SimpleViewPagerIndicator
+            android:id="@+id/home_fragment_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_fragment_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_pic_tag"
+        android:background="@color/color_31AEE7"/>
 
     <Button
-        android:id="@+id/main_api"
+        android:id="@+id/request"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="15dp"
-        android:text="API" />
+        android:layout_height="@dimen/common_60dp"
+        android:text="REQUEST"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
