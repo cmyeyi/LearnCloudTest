@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.SparseArray;
 
 import com.aile.cloud.fragment.HomeFragment;
-import com.aile.cloud.net.bean.HomeProduct;
+import com.aile.cloud.net.bean.MTProduct;
 
 import java.util.List;
 
@@ -15,14 +15,14 @@ import java.util.List;
  */
 
 public class TagPagerAdapter extends FragmentStatePagerAdapter {
-    private SparseArray<List<HomeProduct.Product>> data;
+    private SparseArray<List<MTProduct>> data;
     private List<String> titles;
 
     public TagPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public void setData(SparseArray<List<HomeProduct.Product>> data, List<String> titles) {
+    public void setData(SparseArray<List<MTProduct>> data, List<String> titles) {
         if (null == data) {
             return;
         }

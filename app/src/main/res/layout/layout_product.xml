@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/product_item_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/common_10dp">
+
+    <ImageView
+        android:id="@+id/product_image_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/product_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_image_iv"
+        android:layout_marginTop="@dimen/common_15dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="[预售]Iphone7 plus 256G 红色特别版"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/bottom_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_30dp"
+        android:layout_marginTop="@dimen/common_15dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/progress_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="揭晓进度:"
+                    android:textColor="@color/progress_text_color"
+                    android:textSize="@dimen/t9sp" />
+
+                <TextView
+                    android:id="@+id/progress_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12%"
+                    android:textColor="@color/progress_text_number_color"
+                    android:textSize="@dimen/t9sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_image_clip_left"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_2dp"
+                android:layout_marginBottom="@dimen/common_10dp"
+                android:layout_marginTop="@dimen/common_5dp"
+                android:background="@color/progress_style_line_color"
+                android:src="@drawable/clip_progress_left" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/product_image_iv"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/common_10dp"
+            android:layout_weight="1"
+            android:background="@color/button_miaotao_bg_color"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="立即秒淘"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>
